@@ -30,7 +30,7 @@ class ProductController extends Controller
                 $favID[] = $value->product_id;
             }
         }
-        return view('productsUsers', ['products' => Product::latest()->paginate(8), 'favs' => $favID , 'catrgories' => Category::latest()->get()]);
+        return view('productsUsers', ['products' => Product::select('id', 'title' ,'price' ,'created_at')->latest()->paginate(8), 'favs' => $favID , 'categories' =>Category::latest()->pluck('categories','id')]);
     }
     public function productDetails($id)
     {
@@ -39,13 +39,6 @@ class ProductController extends Controller
         $comments=Comments::where('product_id' ,$id)->with('user')->get();
         return view('productDetails', ['details' => $product , 'comments' => $comments]);
     }
-
-    public function create()
-    {
-        //
-    }
-
-
     public function store(ProductRequest $request)
     {
         $validated = $request->validated();

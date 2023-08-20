@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Events\Registered;
+use Spatie\Permission\Traits\HasRoles;
+use App\Providers\RouteServiceProvider;
 
 class RegisteredUserController extends Controller
 {
+    use HasRoles;
     /**
      * Display the registration view.
      */
@@ -44,7 +47,6 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone,
             'role' => 0,
         ]);
-
         event(new Registered($user));
 
         Auth::login($user);

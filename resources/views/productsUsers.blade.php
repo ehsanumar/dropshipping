@@ -32,12 +32,13 @@
             <div class="mr-8 ">
                 <form action="{{ route('filter') }}" method="post">
                     @csrf
-                    @foreach ($catrgories as $category)
+
+                    @foreach ($categories as $id=> $category)
                         <input type="checkbox" name="categories[]"
                             class=" relative h-5 w-5 mx-4 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 "
-                            value="{{ $category->id }}" id="form"
-                            {{ in_array($category->id, session('selectedCategories', [])) ? 'checked' : '' }} />
-                        <span>{{ $category->categories }}</span>
+                            value="{{ $id }}" id="form"
+                            {{ in_array($id, session('selectedCategories', [])) ? 'checked' : '' }} />
+                        <span>{{ $category }}</span>
                     @endforeach
                     <button type="submit">
                         <i class="fa-solid fa-filter text-3xl ml-3"></i>
@@ -46,6 +47,7 @@
             </div>
         </div>
     </div>
+
     @if (session()->has('result'))
         @if (session('result')->isEmpty())
             <x-norecorded>
@@ -251,3 +253,4 @@
     @endif
 
     </section>
+</div>

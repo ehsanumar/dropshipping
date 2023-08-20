@@ -15,14 +15,6 @@ class BrandController extends Controller
 
         return view('brand', ['brands' => Brand::latest()->paginate(7)]);
     }
-
-
-    public function create()
-    {
-        //
-    }
-
-
     public function store(Request $request)
     {
         $new = $request->validate([
@@ -31,26 +23,6 @@ class BrandController extends Controller
         brand::create(['brand' => $new['brand']]);
         return back()->with('msg', 'Brand Created seccessfully');
     }
-
-
-    public function show($id)
-    {
-        //
-    }
-
-
-    public function edit($id)
-    {
-        //
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-
     public function destroy($id)
     {
         Brand::findOrFail($id)->delete();

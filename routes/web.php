@@ -33,8 +33,7 @@ Route::post('/comment/{product_id}' , [CommentsController::class , 'store'])->na
 Route::get('/comment/{comment_id}/destroy' , [CommentsController::class , 'destroy'])->name('destroy.comment');
     //Add Product
     Route::resource('product', ProductController::class)->only('store','index');
-    Route::get('/products' ,[ProductController::class , 'displayProducts'])->name('products');
-    Route::get('/product/{product_id}/detail' ,[ProductController::class , 'productDetails'])->name('productDetails');
+
     //admin controller
     Route::get('/users' ,[AdminController::class,'showUser'])->name('showUser');
     Route::get('/users/{id}' ,[AdminController::class,'deleteUser'])->name('deleteUser');
@@ -44,9 +43,7 @@ Route::get('/comment/{comment_id}/destroy' , [CommentsController::class , 'destr
     Route::resource('category', CategoryController::class)->only('index','store','destroy');
     //Brand Controller
     Route::resource('brand', BrandController::class)->only('index','store','destroy');
-    //search
-    Route::post('/search' , [ProductController::class , 'search'])->name('search');
-    Route::post('/filter' , [ProductController::class , 'filter'])->name('filter');
+
     //add to card And Favurait
     Route::post("/addtocard/{product_id}", [AddToCadfavController::class,'addToCard'])->name('addtocard');
     Route::post("/addtofav/{product_id}", [AddToCadfavController::class,'addToFav'])->name('addtofav');
@@ -55,5 +52,9 @@ Route::get('/comment/{comment_id}/destroy' , [CommentsController::class , 'destr
     Route::get("/favorite"   , [AddToCadfavController::class, 'showFavorite'])->name('showfavorite');
     Route::get("removefromfavorite/{product_id}"   , [AddToCadfavController::class, 'destroyFavorite'])->name('destroyfavorite');
 });
-
+Route::get('/products', [ProductController::class, 'displayProducts'])->name('products');
+Route::get('/product/{product_id}/detail', [ProductController::class, 'productDetails'])->name('productDetails');
+//search
+Route::post('/search', [ProductController::class, 'search'])->name('search');
+Route::post('/filter', [ProductController::class, 'filter'])->name('filter');
 require __DIR__.'/auth.php';

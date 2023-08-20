@@ -45,17 +45,19 @@ class AddToCadfavController extends Controller
         return back()->with('msg' , 'This Product Add To favourite ');
     }
     public  function showFavorite(){
-        $my=AddToCadfav::where('user_id' , auth()->id())->where('status' , 0)->latest()->get();
-       $add=$my->pluck('product_id')->map(function ($productId){
-        return Product::findOrFail($productId);
-       });
+
+        $add=$this->show(); //use this privet fun for clear code
         return view('favorite' ,['favs'=>$add]);
     }
+    private function show(){
+        $my = AddToCadfav::where('user_id', auth()->id())->where('status', 0)->latest()->get();
+        $add = $my->pluck('product_id')->map(function ($productId) {
+               return Product::findOrFail($productId);
+        });
+        return $add;
+    }
     public  function showCards(){
-        $my=AddToCadfav::where('user_id' , auth()->id())->where('status' , 1)->latest()->get();
-       $add=$my->pluck('product_id')->map(function ($productId){
-        return Product::findOrFail($productId);
-       });
+        $add = $this->show();
         return view('cards-shopping' ,['adds'=>$add]);
     }
     public function destroyFavorite($product_id){

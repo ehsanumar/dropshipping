@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Product extends Model
+class Product extends Model 
 {
     use HasFactory;
     protected $fillable=[
@@ -22,6 +24,7 @@ class Product extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
     public function comments(){
         return $this->hasMany(Comments::class);
     }

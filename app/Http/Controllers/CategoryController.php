@@ -16,13 +16,6 @@ class CategoryController extends Controller
         return view('Categories',['categories' => Category::latest()->paginate(7)]);
     }
 
-
-    public function create()
-    {
-        //
-    }
-
-
     public function store(Request $request)
     {
         $new=$request->validate([
@@ -31,26 +24,6 @@ class CategoryController extends Controller
         Category::create(['categories'=> $new['categories']]);
         return back()->with('msg' , 'Category Created seccessfully');
     }
-
-
-    public function show($id)
-    {
-        //
-    }
-
-
-    public function edit($id)
-    {
-        //
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-
     public function destroy($id)
     {
         Category::findOrFail($id)->delete();

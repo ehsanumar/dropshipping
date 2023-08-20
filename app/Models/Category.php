@@ -9,6 +9,11 @@ class Category extends Model
 {
     use HasFactory;
     protected $fillable = ['categories'];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_categories', 'category_id', 'product_id');

@@ -42,11 +42,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $no = 1; ?>
                                     @foreach (session('result') as $user)
                                         <tr
                                             class="border-b border-gray-900 duration-300 ease-in-out hover:bg-gray-700 hover:text-white transition-all">
-                                            <td class="whitespace-nowrap px-6 py-4 font-medium">{{ $no++ }}</td>
+                                            <td class="whitespace-nowrap px-6 py-4 font-medium">{{ $loop->iteration }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 font-medium">{{ $user->name }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 font-medium">{{ $user->email }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 font-medium">{{ $user->phone }}</td>
@@ -78,11 +77,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no = 1; ?>
                                 @foreach ($users as $user)
                                     <tr
                                         class="border-b border-gray-900    duration-300 ease-in-out hover:bg-gray-700 hover:text-white transition-all">
-                                        <td class="whitespace-nowrap px-6 py-4 font-medium ">{{ $no++ }}
+                                        <td class="whitespace-nowrap px-6 py-4 font-medium ">{{ $loop->iteration }}
                                         </td>
                                         <td class="whitespace-nowrap px-6 py-4 font-medium ">{{ $user->name }}
                                         </td>
@@ -117,13 +115,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no = 1; ?>
-
                                 @foreach ($admins as $admin)
                                     <tr
                                         class="border-b border-gray-900    duration-300 ease-in-out hover:bg-gray-700 hover:text-white transition-all">
-                                        <td class="whitespace-nowrap px-6 py-4 font-medium ">{{ $no++ }}
-                                        </td>
+                                        <td class="whitespace-nowrap px-6 py-4 font-medium ">{{ $loop->iteration }}</td>
                                         <td class="whitespace-nowrap px-6 py-4 font-medium ">{{ $admin->name }}
                                         </td>
                                         <td class="whitespace-nowrap px-6 py-4 font-medium ">{{ $admin->email }}
