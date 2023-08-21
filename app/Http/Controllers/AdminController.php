@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
     public function showUser(){
-        $users=User::where('role','0')->paginate(10);
-        $admins=User::where('role','1')->paginate(5);
-        return view('adminuser',compact('users','admins'));
+        $usersId = DB::table('model_has_roles')->where('role_id', 3)->pluck('model_id');
+        $users = User::whereIn('id', $usersId)->paginate(10);
+
+        $adminsId = DB::table('model_has_roles')->where('role_id', 2)->pluck('model_id');
+        $admins = User::whereIn('id', $adminsId)->paginate(6);
+        return view('dashboard.adminuser',compact('users','admins'));
     }
     public function deleteUser($id){
-        Product::findOrFail($id)->delete();
+        User::findOrFail($id)->delete();
         return back()->with('msgdan' , 'User Deleted Seccessfuly');
     }
     public function searchToUser(Request $request)

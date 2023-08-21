@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="grid grid-cols-12 mt-1  shadow-lg ">
+    <div class="grid grid-cols-12 mt-1  shadow-lg">
 
         <div class="col-span-12 ">
             <form action="{{ route('search') }}" method="post" class="w-6/12 mx-auto">
@@ -25,9 +25,9 @@
 
             </form>
             @if (session()->has('result'))
-            <div class="overflow-hidden my-3 ">
+            <div class="  my-3 ">
                     @if (count(session('result')) > 0)
-                        <table class="text-left text-sm font-light ">
+                        <table class="overflow-x-auto text-left text-sm font-light ">
                             <thead class="border-b border-gray-900 font-medium bg-gray-900  text-white ">
                                 <tr>
                                     <th scope="col" class="px-6 py-4">No</th>
@@ -100,9 +100,9 @@
                 </div>
 
             @else
-                <div class="overflow-hidden my-3 ">
+                <div class="  my-3 ">
                     @if (count($products) > 0)
-                        <table class="text-left text-sm font-light ">
+                        <table class="textoverflow-x-auto -left text-sm font-light ">
                             <thead class="border-b border-gray-900 font-medium bg-gray-900  text-white ">
                                 <tr>
                                     <th scope="col" class="px-6 py-4">No</th>

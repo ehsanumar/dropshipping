@@ -17,8 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(32)->create();
-        $this->call(RoleSeeder::class);
+         \App\Models\Product_category::factory(200)->create();
+    //    \App\Models\User::factory(78)->create()->each(function ($user) {
+    //         $user->assignRole('user'); // Assign the 'user' role to each created user
+    //     });
+        // $this->call(RolePermissionSeeder::class);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

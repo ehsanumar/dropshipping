@@ -13,7 +13,7 @@ class BrandController extends Controller
     public function index()
     {
 
-        return view('brand', ['brands' => Brand::latest()->paginate(7)]);
+        return view('dashboard.brand', ['brands' => Brand::latest()->paginate(7)]);
     }
     public function store(Request $request)
     {

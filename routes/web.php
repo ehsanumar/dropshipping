@@ -20,8 +20,8 @@ Route::get('/', function () {
 Route::view('/aboutus', 'AboutUS')->name('aboutUs');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('dashboard.dashboard');
+})->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -55,6 +55,6 @@ Route::get('/comment/{comment_id}/destroy' , [CommentsController::class , 'destr
 Route::get('/products', [ProductController::class, 'displayProducts'])->name('products');
 Route::get('/product/{product_id}/detail', [ProductController::class, 'productDetails'])->name('productDetails');
 //search
-Route::post('/search', [ProductController::class, 'search'])->name('search');
+Route::get('/search', [ProductController::class, 'search'])->name('search');
 Route::post('/filter', [ProductController::class, 'filter'])->name('filter');
 require __DIR__.'/auth.php';

@@ -2,11 +2,11 @@
 
       <div class="px-8 py-4 flex-grow hover:scale-105 transition-all text-white text-center bg-gray-800 rounded ">
           <h1 class="text-xl"><i class="fa-solid fa-user-plus"></i> Users </h1>
-          <h1>{{ App\Models\User::where('role' ,0)->count() }} +</h1>
+          <h1>{{  DB::table('model_has_roles')->where('role_id', 3)->count() }} +</h1>
       </div>
       <div class="px-8 py-4 flex-grow hover:scale-105 transition-all text-white text-center bg-red-600 rounded ">
           <h1 class="text-xl"><i class="fa-solid fa-user-gear"></i> Admins </h1>
-          <h1>{{ App\Models\User::where('role' ,1)->count() }} </h1>
+          <h1>{{DB::table('model_has_roles')->where('role_id', 2)->count() }} </h1>
       </div>
       <div class="px-8 py-4 flex-grow hover:scale-105 transition-all text-white text-center bg-orange-500 rounded ">
           <h1 class="text-xl"><i class="fa-solid fa-folder-open"></i> Products </h1>

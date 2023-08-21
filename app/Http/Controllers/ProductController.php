@@ -18,7 +18,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        return view('ProductsAdmin', ['products' => Product::with(['categories', 'brands'])->paginate(10)]);
+        return view('dashboard.ProductsAdmin', ['products' => Product::with(['categories', 'brands'])->paginate(10)]);
     }
 
     public function displayProducts()
@@ -73,13 +73,15 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-        if($request['search'] === null){
+        if($request->has('search')){
+            $result = Product::query()->where('description', 'like', '%' . $request['search'] . '%')
+                ->orWhere('title', 'like', '%' . $request['search'] . '%')
+                ->orWhere('price', 'like', '%' . $request['search'] . '%')->paginate(8);
+            return back()->with('result', $result)->with('searchFor' , $request['search']);
+        }else{
             abort(403, "You can't search for nothing");
+
         }
-        $result = Product::query()->where('description', 'like', '%' . $request['search'] . '%')
-            ->orWhere('title', 'like', '%' . $request['search'] . '%')
-            ->orWhere('price', 'like', '%' . $request['search'] . '%')->get();
-        return back()->with('result', $result)->with('searchFor' , $request['search']);
     }
     public function filter(Request $request)
     {
@@ -90,7 +92,7 @@ class ProductController extends Controller
 
         $products = Product::whereHas('categories', function ($query) use ($selectedCategories) {
             $query->whereIn('categories.id', $selectedCategories); // Specify the table alias 'categories'
-        })->get();
+        })->paginate(8);
 
         return back()->with(['filter' => $products ,'selectedCategories' => $selectedCategories]) ;
     }

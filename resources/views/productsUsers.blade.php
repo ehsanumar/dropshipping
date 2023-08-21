@@ -6,10 +6,10 @@
         <h2 class="text-3xl font-bold">Products</h2>
         <div class="block">
 
-            <form action="{{ route('search') }}" method="post">
+            <form action="{{ route('search') }}" method="get">
                 @csrf
                 <div class="relative mb-4 flex w-full flex-wrap items-stretch">
-                    <input type="search" name="search"
+                    <input type="search" name="search"  value="{{ request('search') }}"
                         class="relative  m-0 -mr-0.5 block w-[300px] min-w-0 flex-auto rounded-l border border-solid border-neutral-300  bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-gray-800 focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none"
                         placeholder="Search" aria-label="Search" aria-describedby="button-addon3" />
 
@@ -29,20 +29,24 @@
 
             </form>
 
-            <div class="mr-8 ">
-                <form action="{{ route('filter') }}" method="post">
+            <div class="mr-8 max-w-[600px]">
+                <form action="{{ route('filter') }}" method="post" >
                     @csrf
+<div class="">
 
-                    @foreach ($categories as $id=> $category)
-                        <input type="checkbox" name="categories[]"
-                            class=" relative h-5 w-5 mx-4 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 "
-                            value="{{ $id }}" id="form"
-                            {{ in_array($id, session('selectedCategories', [])) ? 'checked' : '' }} />
-                        <span>{{ $category }}</span>
-                    @endforeach
-                    <button type="submit">
-                        <i class="fa-solid fa-filter text-3xl ml-3"></i>
-                    </button>
+    @foreach ($categories as $id=> $category)
+    <input type="checkbox" name="categories[]"
+    class=" relative h-5 w-5 mx-4 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 "
+    value="{{ $id }}" id="form"
+    {{ in_array($id, session('selectedCategories', [])) ? 'checked' : '' }} />
+    <span>{{ $category }}</span>
+    @endforeach
+</div>
+                  <div class=" justify-center text-center items-center mt-3 ">
+                      <button type="submit" >
+                          <i class="fa-solid fa-filter text-2xl text-gray-100 bg-gray-800 px-6 py-2 rounded-md"></i>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -116,6 +120,7 @@
                     </div>
                 @endforeach
             </div>
+            {{ session('result')->links() }}
         @endif
     @elseif (session()->has('filter'))
         @if (session('filter')->isEmpty())
@@ -185,6 +190,7 @@
                     </div>
                 @endforeach
             </div>
+              {{ session('filter')->links() }}
         @endif
     @else
         <div class="grid grid-cols-3 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
